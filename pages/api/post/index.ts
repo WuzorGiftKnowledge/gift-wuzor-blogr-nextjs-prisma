@@ -1,10 +1,10 @@
 // pages/api/post/index.ts
 
 import { getSession } from 'next-auth/react';
-import { PrismaClient } from '@prisma/client';
+import { prisma} from '../../../lib/prisma';
 
 
-const prisma= new PrismaClient();
+//const prisma= new PrismaClient();
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
