@@ -5,12 +5,11 @@ import Post, { PostProps } from '../components/Post';
 import { useSession, getSession } from 'next-auth/react';
 import { prisma } from '../lib/prisma';
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req });
 
   if (!session || !session.user?.email) {
-    res.statusCode = 403;
-    return { props: { drafts: [] } };
+    return { props: { drafts: [] } }; // Return an empty drafts array if no session is found
   }
 
   let drafts = [];
