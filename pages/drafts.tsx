@@ -9,27 +9,35 @@ import { prisma } from '../lib/prisma';
 // import { PrismaClient } from '@prisma/client';
 
 // const prisma= new PrismaClient();
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (!session) {
-    res.statusCode = 403;
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  try {
+    const session = await getSession({ req });
+
+    // If no session is found, return an empty drafts array
+    if (!session || !session.user?.email) {
+      return { props: { drafts: [] } };
+    }
+
+    // Fetch drafts from the database
+    const drafts = await prisma.post.findMany({
+      where: {
+        author: { email: session.user.email },
+        published: false,
+      },
+      include: {
+        author: {
+          select: { name: true },
+        },
+      },
+    });
+
+    return { props: { drafts } };
+  } catch (error) {
+    console.error('Error in getServerSideProps:', error);
+
+    // Return empty drafts on error to prevent build failure
     return { props: { drafts: [] } };
   }
-
-  const drafts = await prisma.post.findMany({
-    where: {
-      author: { email: session.user.email },
-      published: false,
-    },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
-  return {
-    props: { drafts },
-  };
 };
 
 type Props = {
