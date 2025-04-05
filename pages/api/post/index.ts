@@ -10,7 +10,7 @@ import {options} from '../auth/[...nextauth]';
 export default async function handle(req, res) {
   const { title, content } = req.body;
   const session = await getServerSession(req, res, options); 
- 
+ console.log("Session:", session);
   if (!session) {
     res.status(401).json({ message: 'Unauthorized' });
     return;
