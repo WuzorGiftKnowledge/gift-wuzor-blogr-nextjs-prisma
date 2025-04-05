@@ -1,32 +1,35 @@
-// pages/drafts.tsx
-
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import Layout from '../components/Layout';
 import Post, { PostProps } from '../components/Post';
 import { useSession, getSession } from 'next-auth/react';
-import { prisma} from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 
-//const prisma= new PrismaClient();
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
 
-  if (!session) {
+  if (!session || !session.user?.email) {
     res.statusCode = 403;
     return { props: { drafts: [] } };
   }
 
-  const drafts = await prisma.post.findMany({
-    where: {
-      author: { email: session.user.email },
-      published: false,
-    },
-    include: {
-      author: {
-        select: { name: true },
+  let drafts = [];
+  try {
+    drafts = await prisma.post.findMany({
+      where: {
+        author: { email: session.user.email },
+        published: false,
       },
-    },
-  });
+      include: {
+        author: {
+          select: { name: true },
+        },
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching drafts:', error);
+  }
+
   return {
     props: { drafts },
   };
@@ -37,7 +40,7 @@ type Props = {
 };
 
 const Drafts: React.FC<Props> = (props) => {
-    const { data: session } = useSession();
+  const { data: session } = useSession();
 
   if (!session) {
     return (
