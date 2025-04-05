@@ -17,8 +17,9 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : "Unknown author";
   return (
     <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
+      
       <h2>{post.title}</h2>
-      <small>By {authorName}</small>
+     
       <ReactMarkdown source={post.content} />
       <style jsx>{`
         div {
@@ -26,6 +27,9 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
           padding: 2rem;
         }
       `}</style>
+      <div style={{ textAlign: "right" }}>
+       <small>-{authorName}</small>
+       </div>
     </div>
   );
 };

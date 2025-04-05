@@ -23,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 let url=process.env.NEXT_PUBLIC_LURL;
-console.log(url);
 async function publishPost(id: number): Promise<void> {
   url=`${url}api/publish/${id}`;
   await fetch(url, {

@@ -3,10 +3,22 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import Router from 'next/router';
+import { useSession, getSession } from 'next-auth/react';
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+  
+   
+
+  if (!session) {
+    return <p>You need to be authenticated to create a draft.</p>;
+  }
 
   // /pages/create.tsx
 
@@ -18,6 +30,7 @@ const submitData = async (e: React.SyntheticEvent) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include',
       });
       await Router.push('/drafts');
     } catch (error) {

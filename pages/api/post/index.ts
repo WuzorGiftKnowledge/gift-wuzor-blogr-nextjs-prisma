@@ -1,17 +1,22 @@
 // pages/api/post/index.ts
 
-import { getSession } from 'next-auth/react';
-import { prisma} from '../../../lib/prisma';
+import { getServerSession } from 'next-auth/next';
+import {options} from '../auth/[...nextauth]';
 
 
-//const prisma= new PrismaClient();
 // POST /api/post
 // Required fields in body: title
 // Optional fields in body: content
 export default async function handle(req, res) {
   const { title, content } = req.body;
-
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, options); 
+ 
+  if (!session) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
+  try {
+  
   const result = await prisma.post.create({
     data: {
       title: title,
@@ -20,5 +25,11 @@ export default async function handle(req, res) {
     },
   });
   res.json(result);
+}catch (error) {
+  console.error("Error creating post:", error);
+  res.status(500).json({ error: 'Error creating post' });
+
 }
+}
+
 
