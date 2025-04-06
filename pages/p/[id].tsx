@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { GetServerSideProps } from 'next';
 import ReactMarkdown from 'react-markdown';
 import Layout from '../../components/Layout';
@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { PostProps } from '../../components/Post';
 import { useSession } from 'next-auth/react';
 import {prisma} from '../../lib/prisma';
+import { toPng } from 'html-to-image';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -41,9 +42,12 @@ async function deletePost(id: number): Promise<void> {
 
 const Post: React.FC<PostProps> = (props) => {
   const { data: session, status } = useSession();
-  if (status=="loading") {
+  const postRef = useRef<HTMLDivElement>(null);
+
+  if (status === "loading") {
     return <div>Authenticating ...</div>;
   }
+
   const userHasValidSession = Boolean(session);
   const postBelongsToUser = session?.user?.email === props.author?.email;
   let title = props.title;
@@ -51,20 +55,44 @@ const Post: React.FC<PostProps> = (props) => {
     title = `${title} (Draft)`;
   }
 
+  const downloadPostAsImage = async () => {
+    if (postRef.current) {
+      // Ensure the post content has the desired styles
+      postRef.current.style.backgroundColor = 'black';
+      postRef.current.style.color = 'white';
+  
+      const dataUrl = await toPng(postRef.current, {
+        width: 400, // Set width to 1080px
+        height: 400, // Set height to 1080px
+      });
+  
+      // Revert styles after generating the image
+      postRef.current.style.backgroundColor = '';
+      postRef.current.style.color = '';
+  
+      const link = document.createElement('a');
+      link.download = `${props.title}.png`;
+      link.href = dataUrl;
+      link.click();
+    }
+  };
+
+
   return (
     <Layout>
       <div>
-        <h2>{title}</h2>
-        <p>By {props?.author?.name || 'Unknown author'}</p>
-        <ReactMarkdown source={props.content} />
+        <div ref={postRef} style={{ color: 'black', backgroundColor: 'white', padding: '2rem' }}>
+          <h2>{title}</h2>
+          <p>By {props?.author?.name || 'Unknown author'}</p>
+          <ReactMarkdown source={props.content} />
+        </div>
+        <button onClick={downloadPostAsImage}>Download as PNG</button>
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
         )}
-{
-  userHasValidSession && postBelongsToUser && (
-    <button onClick={() => deletePost(props.id)}>Delete</button>
-  )
-}
+        {userHasValidSession && postBelongsToUser && (
+          <button onClick={() => deletePost(props.id)}>Delete</button>
+        )}
       </div>
       <style jsx>{`
         .page {
