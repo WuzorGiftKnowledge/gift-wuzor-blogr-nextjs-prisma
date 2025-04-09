@@ -7,6 +7,7 @@ import { PostProps } from '../../components/Post';
 import { useSession } from 'next-auth/react';
 import {prisma} from '../../lib/prisma';
 import { toPng } from 'html-to-image';
+import Post from '../../components/Post';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -40,7 +41,7 @@ async function deletePost(id: number): Promise<void> {
   Router.push('/');
 }
 
-const Post: React.FC<PostProps> = (props) => {
+const GetPost: React.FC<PostProps> = (props) => {
   const { data: session, status } = useSession();
   const postRef = useRef<HTMLDivElement>(null);
 
@@ -60,10 +61,13 @@ const Post: React.FC<PostProps> = (props) => {
       // Ensure the post content has the desired styles
       postRef.current.style.backgroundColor = 'black';
       postRef.current.style.color = 'white';
-  
+      postRef.current.style.overflow = "visible"; // Ensure no content is clipped
+    postRef.current.style.padding = "0"; // Remove padding
+    postRef.current.style.margin = "0"
+  console.log(postRef.current.scrollWidth, postRef.current.scrollHeight);
       const dataUrl = await toPng(postRef.current, {
-        width: 400, // Set width to 1080px
-        height: 400, // Set height to 1080px
+        width: postRef.current.scrollWidth, // Match the width of the div
+        height: postRef.current.scrollHeight+100, // Match the height of the div
       });
   
       // Revert styles after generating the image
@@ -80,12 +84,12 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <div>
-        <div ref={postRef} style={{ color: 'black', backgroundColor: 'white', padding: '2rem' }}>
-          <h2>{title}</h2>
-          <p>By {props?.author?.name || 'Unknown author'}</p>
-          <ReactMarkdown source={props.content} />
+      <div className="w-100 max-w-xl mx-2 bg-white p-4">
+       
+        <div  ref={postRef}>
+        <Post post={props} />
         </div>
+
         <button onClick={downloadPostAsImage}>Download as PNG</button>
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
@@ -119,4 +123,4 @@ const Post: React.FC<PostProps> = (props) => {
   );
 };
 
-export default Post;
+export default GetPost;
