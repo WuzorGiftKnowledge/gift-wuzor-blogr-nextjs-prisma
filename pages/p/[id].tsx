@@ -25,9 +25,19 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-let url=process.env.NEXT_PUBLIC_LURL;
+// Use relative URLs or ensure HTTPS
+const getApiUrl = () => {
+  if (typeof window !== 'undefined') {
+    // Client-side: use current origin (ensures HTTPS in production)
+    return window.location.origin;
+  }
+  // Server-side: use environment variable or default
+  return process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_LURL || '';
+};
+
 async function publishPost(id: number): Promise<void> {
-  url=`${url}api/publish/${id}`;
+  const baseUrl = getApiUrl();
+  const url = `${baseUrl}/api/publish/${id}`;
   await fetch(url, {
     method: 'PUT',
   });
@@ -35,7 +45,8 @@ async function publishPost(id: number): Promise<void> {
 }
 
 async function deletePost(id: number): Promise<void> {
-  url=`${url}/api/post/${id}`;
+  const baseUrl = getApiUrl();
+  const url = `${baseUrl}/api/post/${id}`;
   await fetch(url, {
     method: 'DELETE',
   });
