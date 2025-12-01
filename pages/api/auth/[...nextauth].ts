@@ -20,8 +20,12 @@ const options = {
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      authorization: {
+        params: {
+          redirect_uri: `${baseUrl}/api/auth/callback/github`,
+        },
+      },
       profile(profile) {
-    
         return {
           id: profile.id.toString(),
           name: profile.name || profile.login,
@@ -33,6 +37,11 @@ const options = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          redirect_uri: `${baseUrl}/api/auth/callback/google`,
+        },
+      },
       profile(profile) {
         return {
           id: profile.sub,
