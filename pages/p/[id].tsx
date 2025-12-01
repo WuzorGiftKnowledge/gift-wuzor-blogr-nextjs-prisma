@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react';
 import {prisma} from '../../lib/prisma';
 import { toPng } from 'html-to-image';
 import Link from 'next/link';
+import { markdownToSafeHtml } from '../../lib/sanitize';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -420,11 +421,7 @@ const GetPost: React.FC<PostProps> = (props) => {
             {props.content ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: props.content
-                    .substring(0, 300)
-                    .replace(/\n/g, '<br/>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>'),
+                  __html: markdownToSafeHtml(props.content.substring(0, 300)),
                 }}
               />
             ) : (
@@ -536,11 +533,7 @@ const GetPost: React.FC<PostProps> = (props) => {
             {props.content ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: props.content
-                    .substring(0, 500)
-                    .replace(/\n/g, '<br/>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>'),
+                  __html: markdownToSafeHtml(props.content.substring(0, 500)),
                 }}
               />
             ) : (
