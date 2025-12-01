@@ -63,6 +63,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
   createdAt     DateTime  @default(now()) @map(name: "created_at")
@@ -76,4 +77,28 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Testimony {
+  id          Int      @default(autoincrement()) @id
+  testimony   String
+  name        String?
+  email       String?
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "Testimony")
+}
+
+model PrayerPoint {
+  id          Int      @default(autoincrement()) @id
+  prayerPoint String
+  name        String?
+  email       String?
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "PrayerPoint")
 }
