@@ -4,9 +4,7 @@ import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import Link from "next/link";
 import Image from "next/image";
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '../lib/prisma'
 
 type Props = {
   feed: PostProps[];
