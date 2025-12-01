@@ -43,6 +43,10 @@ const options = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
   debug: process.env.NODE_ENV === 'development',
+  // Ensure HTTPS is used in production
+  useSecureCookies: process.env.NODE_ENV === 'production',
+  // Trust proxy for Vercel
+  trustHost: true,
 
   callbacks: {
     async signIn({ user, account, profile }) {
