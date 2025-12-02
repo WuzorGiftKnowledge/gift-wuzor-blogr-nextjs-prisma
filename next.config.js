@@ -47,7 +47,7 @@ const nextConfig = {
               "frame-src 'self' https://accounts.google.com https://github.com https://vercel.com",
               "frame-ancestors 'self'",
               "base-uri 'self'",
-              "form-action 'self'",
+              "form-action 'self' https://accounts.google.com https://github.com https://wapnetwork.org https://www.wapnetwork.org",
             ].join('; ')
           }
         ],
