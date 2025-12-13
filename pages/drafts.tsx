@@ -75,10 +75,8 @@ const Drafts: React.FC<Props> = (props) => {
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-4">Authentication Required</h1>
             <p className="text-gray-600 mb-6">You need to be authenticated to view your drafts.</p>
-            <Link href="/api/auth/signin">
-              <a className="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md">
-                Log in
-              </a>
+            <Link href="/api/auth/signin" className="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md">
+              Log in
             </Link>
           </div>
         </div>
@@ -103,13 +101,11 @@ const Drafts: React.FC<Props> = (props) => {
                 }
               </p>
             </div>
-            <Link href="/create">
-              <a className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg flex items-center whitespace-nowrap">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                New Draft
-              </a>
+            <Link href="/create" className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg flex items-center whitespace-nowrap">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              New Draft
             </Link>
           </div>
         </div>
@@ -126,10 +122,8 @@ const Drafts: React.FC<Props> = (props) => {
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
               Start writing by creating your first draft. Your drafts will appear here before you publish them.
             </p>
-            <Link href="/create">
-              <a className="inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg">
-                Create Your First Draft
-              </a>
+            <Link href="/create" className="inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg">
+              Create Your First Draft
             </Link>
           </div>
         ) : (

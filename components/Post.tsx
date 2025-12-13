@@ -20,7 +20,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       
       <h2 className="text-2xl font-mono">{post.title}</h2>
      
-      <ReactMarkdown className="prose break-words whitespace-pre-wrap" source={post.content} />
+      <ReactMarkdown className="prose break-words whitespace-pre-wrap">{post.content}</ReactMarkdown>
     
       <div className="text-lg font-bold italic" >
        <small>-{authorName}</small>

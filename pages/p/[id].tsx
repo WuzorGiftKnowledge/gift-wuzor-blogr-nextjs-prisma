@@ -128,13 +128,11 @@ const GetPost: React.FC<PostProps> = (props) => {
     <Layout>
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Back Button */}
-        <Link href="/">
-          <a className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium mb-6 transition-colors">
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Feed
-          </a>
+        <Link href="/" className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium mb-6 transition-colors">
+          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Feed
         </Link>
 
         {/* Main Post Card */}
@@ -167,9 +165,9 @@ const GetPost: React.FC<PostProps> = (props) => {
           <div className="p-8 md:p-12">
             <div ref={postRef} className="prose prose-lg max-w-none">
               <div className="text-gray-800 leading-relaxed markdown-content">
-                <ReactMarkdown 
-                  source={props.content}
-                />
+                <ReactMarkdown>
+                  {props.content || ''}
+                </ReactMarkdown>
               </div>
             </div>
             <style jsx global>{`
@@ -328,13 +326,11 @@ const GetPost: React.FC<PostProps> = (props) => {
 
         {/* Related Posts or Navigation */}
         <div className="mt-12 text-center">
-          <Link href="/">
-            <a className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-              View All Posts
-            </a>
+          <Link href="/" className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            View All Posts
           </Link>
         </div>
       </div>

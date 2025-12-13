@@ -86,15 +86,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/testimony">
-              <a className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-all shadow-lg transform hover:scale-105">
-                Share Your Testimony
-              </a>
+            <Link href="/testimony" className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-all shadow-lg transform hover:scale-105">
+              Share Your Testimony
             </Link>
-            <Link href="/prayer-point">
-              <a className="px-8 py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all shadow-lg transform hover:scale-105">
-                Submit Prayer Point
-              </a>
+            <Link href="/prayer-point" className="px-8 py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all shadow-lg transform hover:scale-105">
+              Submit Prayer Point
             </Link>
           </div>
         </div>
@@ -124,13 +120,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
               <p className="text-gray-600 mb-6">
                 Share how God has been working in your life. Your testimony can inspire and encourage others in their faith journey.
               </p>
-              <Link href="/testimony">
-                <a className="text-indigo-600 font-semibold hover:text-indigo-700 inline-flex items-center">
-                  Share Now
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+              <Link href="/testimony" className="text-indigo-600 font-semibold hover:text-indigo-700 inline-flex items-center">
+                Share Now
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
 
@@ -145,13 +139,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
               <p className="text-gray-600 mb-6">
                 Submit your prayer requests. Our community will stand with you in prayer, lifting your needs before God.
               </p>
-              <Link href="/prayer-point">
-                <a className="text-purple-600 font-semibold hover:text-purple-700 inline-flex items-center">
-                  Submit Request
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+              <Link href="/prayer-point" className="text-purple-600 font-semibold hover:text-purple-700 inline-flex items-center">
+                Submit Request
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
 
@@ -166,13 +158,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
               <p className="text-gray-600 mb-6">
                 Connect with believers, read inspiring posts, and grow together in faith through shared experiences and wisdom.
               </p>
-              <Link href="/api/auth/signin">
-                <a className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
-                  Join Community
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+              <Link href="/api/auth/signin" className="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
+                Join Community
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -216,13 +206,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
             </div>
 
             <div className="text-center">
-              <Link href="/testimonies">
-                <a className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg">
-                  See More Testimonies
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
+              <Link href="/testimonies" className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-lg">
+                See More Testimonies
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -290,15 +278,11 @@ const LandingPage: React.FC<Props> = ({ feed, testimonies }) => {
             Join our community today and be part of a network that supports, prays, and grows together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/testimony">
-              <a className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-all shadow-lg">
-                Share Your Story
-              </a>
+            <Link href="/testimony" className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-all shadow-lg">
+              Share Your Story
             </Link>
-            <Link href="/prayer-point">
-              <a className="px-8 py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all shadow-lg border-2 border-white">
-                Request Prayer
-              </a>
+            <Link href="/prayer-point" className="px-8 py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-all shadow-lg border-2 border-white">
+              Request Prayer
             </Link>
           </div>
         </div>

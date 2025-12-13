@@ -54,14 +54,14 @@ const Dropdown: React.FC<DropdownProps> = ({ label, items, isActive = false }) =
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
           {items.map((item, index) => (
-            <Link key={index} href={item.href}>
-              <a
-                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.icon && <span className="mr-3">{item.icon}</span>}
-                {item.label}
-              </a>
+            <Link
+              key={index}
+              href={item.href}
+              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.icon && <span className="mr-3">{item.icon}</span>}
+              {item.label}
             </Link>
           ))}
         </div>
